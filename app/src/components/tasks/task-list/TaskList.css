@@ -1,0 +1,20 @@
+.container-list {
+  width: 800px;
+  background-color: rgb(245, 245, 245);
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.container-list__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 3px solid white;
+}
+
+.container-list__item i {
+  margin-right: 1rem;
+}

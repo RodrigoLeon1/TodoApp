@@ -18,6 +18,7 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
+
     public Task create(Task newTask) {
         return taskRepository.save(newTask);
     }

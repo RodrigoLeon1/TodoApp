@@ -3,6 +3,8 @@ package com.rodrigoleon.todos.controller;
 import com.rodrigoleon.todos.model.Task;
 import com.rodrigoleon.todos.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,8 +29,10 @@ public class TaskController {
     }
 
     @GetMapping("/")
-    public List<Task> findAll() {
-        return taskService.findAll();
+    public ResponseEntity<List<Task>> findAll() {
+        List<Task> tasks = taskService.findAll();
+        System.out.println(tasks);
+        return (tasks.size() > 0) ? ResponseEntity.ok(tasks) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping("/{id}")

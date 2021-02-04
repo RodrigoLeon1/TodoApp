@@ -1,5 +1,6 @@
 package com.rodrigoleon.todos.service;
 
+import com.rodrigoleon.todos.exception.user.UserDoesNotExistException;
 import com.rodrigoleon.todos.model.User;
 import com.rodrigoleon.todos.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,20 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Long id) throws UserDoesNotExistException {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) throw new UserDoesNotExistException();
         userRepository.deleteById(id);
     }
 
-    public User updateById(Long id, User updatedTask) {
-        return userRepository.save(updatedTask);
+    public User updateById(Long id, User updatedUser) throws UserDoesNotExistException {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) throw new UserDoesNotExistException();
+
+        user.get().setUsername(updatedUser.getUsername());
+        user.get().setPassword(updatedUser.getPassword());
+
+        return userRepository.save(user.get());
     }
 
 }

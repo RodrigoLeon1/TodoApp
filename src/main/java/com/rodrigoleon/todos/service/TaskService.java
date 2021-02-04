@@ -28,14 +28,15 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public Optional<Task> findById(Long id) {
-        return taskRepository.findById(id);
+    public Task findById(Long id) throws TaskDoesNotExistException {
+        Optional<Task> task = taskRepository.findById(id);
+        if (task.isEmpty()) throw new TaskDoesNotExistException();
+        return task.get();
     }
 
     public void deleteById(Long id) throws TaskDoesNotExistException {
         Optional<Task> task = taskRepository.findById(id);
         if (task.isEmpty()) throw new TaskDoesNotExistException();
-
         taskRepository.deleteById(id);
     }
 

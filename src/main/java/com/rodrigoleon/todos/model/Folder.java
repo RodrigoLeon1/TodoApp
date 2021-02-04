@@ -1,6 +1,5 @@
 package com.rodrigoleon.todos.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,29 +7,24 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "tasks")
-public class Task {
+@Table(name = "folders")
+public class Folder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String title;
+    private String name;
 
-    @NotNull
-    private boolean isCompleted;
-
-    @NotNull
-    @JsonBackReference(value = "folderTask")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_folder", nullable = false)
-    private Folder folder;
+    @OneToMany(mappedBy = "folder")
+    private List<Task> tasks;
 
 }

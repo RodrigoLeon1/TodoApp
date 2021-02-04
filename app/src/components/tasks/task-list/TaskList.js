@@ -1,11 +1,19 @@
 import Task from '../task/Task'
 import './TaskList.css'
 
-const TaskList = () => (
+const TaskList = ({ tasks, setTasks }) => (
   <ul className='container-list'>
-    <li className='container-list__item'>
-      <Task title='Create fullstack application' />
-    </li>
+    {tasks.map((task) => (
+      <li key={task.id} className='container-list__item'>
+        <Task
+          id={task.id}
+          completed={task.completed}
+          title={task.title}
+          tasks={tasks}
+          setTasks={setTasks}
+        />
+      </li>
+    ))}
   </ul>
 )
 

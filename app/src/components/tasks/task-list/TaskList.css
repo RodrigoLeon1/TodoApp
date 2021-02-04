@@ -3,6 +3,8 @@
   background-color: rgb(245, 245, 245);
   padding: 2rem;
   border-radius: 5px;
+  height: 300px;
+  overflow-y: scroll;
 }
 
 .container-list__item {
@@ -17,4 +19,13 @@
 
 .container-list__item i {
   margin-right: 1rem;
+  cursor: pointer;
+}
+
+.container-list__item i:hover.edit-i {
+  color: rgb(41, 168, 9);
+}
+
+.container-list__item i:hover.alert-i {
+  color: rgb(255, 0, 0);
 }

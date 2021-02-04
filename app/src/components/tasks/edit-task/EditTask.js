@@ -1,19 +1,21 @@
-import './EditTask.css'
+// import { useState } from 'react'
+// import Button from '../../button/Button'
+// import './EditTask.css'
 
-const EditTask = () => {
-  //
+// const EditTask = ({ id, title }) => {
+//   const [taskTitle, setTaskTitle] = useState(title)
 
-  return (
-    <form className='edit-task-container'>
-      <input type='text' name='title' id='title' className='input-submit' />
-      <div className='edit-task-container__cta'>
-        <button type='submit' className='btn'>
-          Save
-        </button>
-        <button className='btn btn-cancel'>Cancel</button>
-      </div>
-    </form>
-  )
-}
+//   const handleChangeTitle = (e) => setTaskTitle(e.target.value)
 
-export default EditTask
+//   const handleSubmit = (e) => {
+//     e.preventDefault()
+//     if (!taskTitle) return alert('Complete the field!')
+//     console.log('Editando task!')
+//   }
+
+//   return (
+
+//   )
+// }
+
+// export default EditTask

@@ -1,16 +1,35 @@
-const Task = ({ id, isCompleted, title }) => (
-  <>
-    <div>
-      <label>
-        <input type='checkbox' />
-        {title}
-      </label>
-    </div>
-    <div>
-      <i class='fas fa-edit'></i>
-      <i class='fas fa-trash-alt'></i>
-    </div>
-  </>
-)
+import { ENDPOINT_TASKS } from '../../../utils/Api'
+import { Link } from 'react-router-dom'
+
+const Task = ({ id, completed, title, tasks, setTasks }) => {
+  const handleDelete = () => {
+    const init = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    }
+
+    fetch(`${ENDPOINT_TASKS}/${id}`, init).then((response) => {
+      if (!response.ok) throw new Error('Error deleting task')
+      setTasks(tasks.filter((task) => task.id !== id))
+    })
+  }
+
+  return (
+    <>
+      <div>
+        <label>
+          <input type='checkbox' checked={completed} />
+          {title}
+        </label>
+      </div>
+      <div>
+        <Link to={`/tasks/${id}`}>
+          <i class='fas fa-edit edit-i'></i>
+        </Link>
+        <i class='fas fa-trash-alt alert-i' onClick={handleDelete}></i>
+      </div>
+    </>
+  )
+}
 
 export default Task

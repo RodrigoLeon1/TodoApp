@@ -1,5 +1,6 @@
 package com.rodrigoleon.todos.controller;
 
+import com.rodrigoleon.todos.exception.task.TaskDoesNotExistException;
 import com.rodrigoleon.todos.model.Task;
 import com.rodrigoleon.todos.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/tasks")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TaskController {
 
     private final TaskService taskService;
@@ -36,18 +38,19 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Task> findById(@PathVariable final Long id) {
-        return taskService.findById(id);
+    public ResponseEntity<Optional<Task>> findById(@PathVariable final Long id) {
+        Optional<Task> task = taskService.findById(id);
+        return ResponseEntity.ok(task);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable final Long id) {
+    public void deleteById(@PathVariable final Long id) throws TaskDoesNotExistException {
         taskService.deleteById(id);
     }
 
     @PutMapping("/{id}")
     public Task updateById(@RequestBody @Valid final Task updatedTask,
-                           @PathVariable final Long id) {
+                           @PathVariable final Long id) throws TaskDoesNotExistException {
         return taskService.updateById(id, updatedTask);
     }
 

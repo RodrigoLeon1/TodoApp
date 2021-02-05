@@ -44,7 +44,7 @@ public class TaskService {
         Optional<Task> task = taskRepository.findById(id);
         if (task.isEmpty()) throw new TaskDoesNotExistException();
 
-        task.get().setTitle(updatedTask.getTitle());
+        if (updatedTask.getTitle() != null) task.get().setTitle(updatedTask.getTitle());
         task.get().setCompleted(updatedTask.isCompleted());
 
         return taskRepository.save(task.get());

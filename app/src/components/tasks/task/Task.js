@@ -2,7 +2,6 @@ import { ENDPOINT_TASKS } from '../../../utils/Api'
 import { Link } from 'react-router-dom'
 
 const Task = ({ id, completed, title, tasks, setTasks }) => {
-  // no actualiza la tarea
   const handleOnChange = (e) => {
     const updatedTask = {
       id,
@@ -19,7 +18,17 @@ const Task = ({ id, completed, title, tasks, setTasks }) => {
     fetch(`${ENDPOINT_TASKS}${id}`, init)
       .then((response) => {
         if (!response.ok) throw new Error('Error updating task')
-        setTasks([...tasks, updatedTask])
+
+        setTasks(
+          tasks.map((task) => {
+            if (task.id === id)
+              return {
+                ...task,
+                completed: updatedTask.completed,
+              }
+            return task
+          })
+        )
       })
       .catch((e) => console.log(e))
   }

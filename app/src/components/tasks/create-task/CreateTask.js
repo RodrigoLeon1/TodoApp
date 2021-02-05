@@ -5,7 +5,6 @@ import './CreateTask.css'
 
 const CreateTask = ({ tasks, setTasks }) => {
   const [title, setTitle] = useState('')
-  const [error, setError] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleChangeTitle = (e) => setTitle(e.target.value)
@@ -17,22 +16,31 @@ const CreateTask = ({ tasks, setTasks }) => {
 
     const newTask = {
       title,
-      isCompleted: false,
+      completed: false,
+      folder: {
+        id: 1, // Hardcoded for test
+      },
     }
 
     const init = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Access-Control-Expose-Headers': '*',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(newTask),
     }
 
     fetch(ENDPOINT_TASKS, init)
       .then((response) => {
         if (!response.ok) throw new Error('Error creating task')
+        console.log(response)
+        console.log(response.headers.get('Location'))
+
         setTasks([newTask, ...tasks])
-        e.target.reset()
+        setTitle('')
       })
-      .catch((err) => setError(true))
+      .catch((err) => console.log('Error...'))
       .finally(() => setIsLoading(false))
   }
 

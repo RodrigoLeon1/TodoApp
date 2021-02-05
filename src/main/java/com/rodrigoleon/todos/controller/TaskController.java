@@ -51,7 +51,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateById(@RequestBody @Valid final Task updatedTask,
+    public ResponseEntity<Task> updateById(@RequestBody final Task updatedTask,
                                            @PathVariable final Long id) throws TaskDoesNotExistException {
         Task task = taskService.updateById(id, updatedTask);
         return ResponseEntity.ok(task);

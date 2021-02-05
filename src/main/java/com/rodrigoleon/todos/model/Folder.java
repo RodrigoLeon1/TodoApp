@@ -1,5 +1,6 @@
 package com.rodrigoleon.todos.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class Folder {
     @NotNull
     private String name;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "folder")
     private List<Task> tasks;
 

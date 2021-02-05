@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ENDPOINT_TASKS } from '../utils/Api'
 import Title from '../components/title/Title'
 import Button from '../components/button/Button'
@@ -55,7 +56,9 @@ const Edit = () => {
             />
             <div className='edit-task-container__cta'>
               <Button type='submit' text='Save' />
-              <Button type='submit' text='Cancel' />
+              <Link to='/'>
+                <Button type='button' text='Cancel' classCss='btn-cancel' />
+              </Link>
             </div>
           </form>
         </>

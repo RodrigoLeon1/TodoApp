@@ -28,9 +28,9 @@ public class Task {
     private boolean isCompleted;
 
     @NotNull
-    @JsonBackReference(value = "folderTask")
+    @JsonBackReference()
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_folder", nullable = false)
+    @JoinColumn(name = "id_folder")
     private Folder folder;
 
 }

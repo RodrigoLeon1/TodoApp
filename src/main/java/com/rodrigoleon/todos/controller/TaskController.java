@@ -29,7 +29,7 @@ public class TaskController {
     public ResponseEntity<Task> create(@RequestBody @Valid final Task newTask){
         // Validate title...
         Task task = taskService.create(newTask);
-        return ResponseEntity.created(RestUtils.getLocation(task.getId())).build();
+        return ResponseEntity.created(RestUtils.getLocation(task.getId())).body(task);
     }
 
     @GetMapping("/")

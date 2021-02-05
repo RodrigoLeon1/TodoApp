@@ -18,7 +18,6 @@ const Edit = () => {
       .then((response) => response.json())
       .then((object) => {
         setTask(object)
-        console.log(object)
       })
   }, [])
 

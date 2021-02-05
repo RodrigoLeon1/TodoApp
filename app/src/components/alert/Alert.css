@@ -25,3 +25,9 @@
   background-color: #fff3cd;
   border-color: #ffeeba;
 }
+
+@media (max-width: 900px) {
+  .alert {
+    width: 50%;
+  }
+}

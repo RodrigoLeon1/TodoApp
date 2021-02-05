@@ -4,3 +4,20 @@
   align-items: center;
   justify-content: space-between;
 }
+
+@media (max-width: 900px) {
+  .edit-task-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .edit-task-container input {
+    width: auto;
+  }
+
+  .edit-task-container__cta {
+    justify-content: center;
+  }
+}

@@ -14,7 +14,7 @@ const CreateTask = ({ tasks, setTasks }) => {
     if (!title) return alert('Complete the field!')
     setIsLoading(true)
 
-    const newTask = {
+    let newTask = {
       title,
       completed: false,
       folder: {
@@ -24,19 +24,17 @@ const CreateTask = ({ tasks, setTasks }) => {
 
     const init = {
       method: 'POST',
-      headers: {
-        'Access-Control-Expose-Headers': '*',
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTask),
     }
 
     fetch(ENDPOINT_TASKS, init)
       .then((response) => {
         if (!response.ok) throw new Error('Error creating task')
-        console.log(response)
-        console.log(response.headers.get('Location'))
-
+        return response.json()
+      })
+      .then((object) => {
+        newTask = { ...newTask, id: object.id }
         setTasks([newTask, ...tasks])
         setTitle('')
       })
